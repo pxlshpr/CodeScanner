@@ -1,5 +1,6 @@
 import AVFoundation
 import SwiftUI
+import SwiftUISugar
 
 public extension CodeScanner {
     enum ScanError: Error {
