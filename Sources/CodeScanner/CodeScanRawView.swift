@@ -163,8 +163,11 @@ public struct CodeScanRawView: UIViewControllerRepresentable {
             view.layer.addSublayer(previewLayer!)
             
             // Start video capture.
-            captureSession.startRunning()
-            
+//            captureSession.startRunning()
+            DispatchQueue.global(qos: .background).async {
+                captureSession.startRunning()
+            }
+
             //      if (captureSession.canAddInput(videoInput)) {
             //        captureSession.addInput(videoInput)
             //      } else {
@@ -205,14 +208,19 @@ public struct CodeScanRawView: UIViewControllerRepresentable {
             //      previewLayer.videoGravity = .resizeAspectFill
             //      view.layer.addSublayer(previewLayer)
             //      updateOrientation()
-            captureSession.startRunning()
+            
+            DispatchQueue.global(qos: .background).async {
+                captureSession.startRunning()
+            }
         }
         
         override public func viewWillAppear(_ animated: Bool) {
             super.viewWillAppear(animated)
             
             if (captureSession?.isRunning == false) {
-                captureSession.startRunning()
+                DispatchQueue.global(qos: .background).async {
+                    captureSession.startRunning()
+                }
             }
         }
         
@@ -220,7 +228,9 @@ public struct CodeScanRawView: UIViewControllerRepresentable {
             super.viewWillDisappear(animated)
             
             if (captureSession?.isRunning == true) {
-                captureSession.stopRunning()
+                DispatchQueue.global(qos: .background).async {
+                    captureSession.stopRunning()
+                }
             }
             
             NotificationCenter.default.removeObserver(self)
