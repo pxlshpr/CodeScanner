@@ -165,7 +165,7 @@ public struct CodeScanRawView: UIViewControllerRepresentable {
             // Start video capture.
 //            captureSession.startRunning()
             DispatchQueue.global(qos: .background).async {
-                captureSession.startRunning()
+                self.captureSession.startRunning()
             }
 
             //      if (captureSession.canAddInput(videoInput)) {
@@ -210,7 +210,7 @@ public struct CodeScanRawView: UIViewControllerRepresentable {
             //      updateOrientation()
             
             DispatchQueue.global(qos: .background).async {
-                captureSession.startRunning()
+                self.captureSession.startRunning()
             }
         }
         
@@ -219,7 +219,7 @@ public struct CodeScanRawView: UIViewControllerRepresentable {
             
             if (captureSession?.isRunning == false) {
                 DispatchQueue.global(qos: .background).async {
-                    captureSession.startRunning()
+                    self.captureSession.startRunning()
                 }
             }
         }
@@ -229,7 +229,7 @@ public struct CodeScanRawView: UIViewControllerRepresentable {
             
             if (captureSession?.isRunning == true) {
                 DispatchQueue.global(qos: .background).async {
-                    captureSession.stopRunning()
+                    self.captureSession.stopRunning()
                 }
             }
             
