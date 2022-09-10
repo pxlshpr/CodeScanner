@@ -11,9 +11,9 @@ public struct CodeScanner: View {
     let codeTypes: [AVMetadataObject.ObjectType] = [.upce, .code39, .code39Mod43, .ean13, .ean8, .code93, .code128, .pdf417, .qr, .aztec]
     
     @State var lineY: CGFloat = 0
-    var handleScan: ((Result<String, CodeScanRawView.ScanError>) -> Void)
+    var handleScan: ((Result<String, CodeScanner.ScanError>) -> Void)
     
-    public init(handleScan: @escaping (Result<String, CodeScanRawView.ScanError>) -> Void) {
+    public init(handleScan: @escaping (Result<String, CodeScanner.ScanError>) -> Void) {
         self.handleScan = handleScan
     }
     

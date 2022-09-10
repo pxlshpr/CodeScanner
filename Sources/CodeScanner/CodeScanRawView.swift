@@ -1,10 +1,13 @@
 import AVFoundation
 import SwiftUI
 
-public struct CodeScanRawView: UIViewControllerRepresentable {
-    public enum ScanError: Error {
+public extension CodeScanner {
+    enum ScanError: Error {
         case badInput, badOutput
     }
+}
+
+public struct CodeScanRawView: UIViewControllerRepresentable {
     
     public class ScannerCoordinator: NSObject, AVCaptureMetadataOutputObjectsDelegate {
         var parent: CodeScanRawView
@@ -32,7 +35,7 @@ public struct CodeScanRawView: UIViewControllerRepresentable {
             parent.completion(.success(code))
         }
         
-        func didFail(reason: ScanError) {
+        func didFail(reason: CodeScanner.ScanError) {
             parent.completion(.failure(reason))
         }
     }
@@ -234,9 +237,9 @@ public struct CodeScanRawView: UIViewControllerRepresentable {
     
     public let codeTypes: [AVMetadataObject.ObjectType]
     public var simulatedData = ""
-    public var completion: (Result<String, ScanError>) -> Void
+    public var completion: (Result<String, CodeScanner.ScanError>) -> Void
     
-    public init(codeTypes: [AVMetadataObject.ObjectType], simulatedData: String = "", completion: @escaping (Result<String, ScanError>) -> Void) {
+    public init(codeTypes: [AVMetadataObject.ObjectType], simulatedData: String = "", completion: @escaping (Result<String, CodeScanner.ScanError>) -> Void) {
         self.codeTypes = codeTypes
         self.simulatedData = simulatedData
         self.completion = completion
